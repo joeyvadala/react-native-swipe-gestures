@@ -12,11 +12,14 @@ export const swipeDirections = {
 
 const swipeConfig = {
   velocityThreshold: 0.3,
-  directionalOffsetThreshold: 80
+  directionalOffsetThreshold: 80,
+  horizontalOnly: true
 };
 
 function isValidSwipe(velocity, velocityThreshold, directionalOffset, directionalOffsetThreshold) {
-  console.log('OFFSET:' directionalOffset)
+  if (this.swipeConfig.horizontalOnly) {
+    console.log('OFFSET:', directionalOffset);  
+  }
   return Math.abs(velocity) > velocityThreshold && Math.abs(directionalOffset) < directionalOffsetThreshold;
 }
 
