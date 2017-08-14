@@ -12,14 +12,10 @@ export const swipeDirections = {
 
 const swipeConfig = {
   velocityThreshold: 0.3,
-  directionalOffsetThreshold: 80,
-  horizontalOnly: true
+  directionalOffsetThreshold: 80
 };
 
 function isValidSwipe(velocity, velocityThreshold, directionalOffset, directionalOffsetThreshold) {
-  if (this.swipeConfig.horizontalOnly) {
-    console.log('OFFSET:', directionalOffset);  
-  }
   return Math.abs(velocity) > velocityThreshold && Math.abs(directionalOffset) < directionalOffsetThreshold;
 }
 
@@ -55,6 +51,8 @@ class GestureRecognizer extends Component {
 
   _handlePanResponderEnd(evt, gestureState) {
     const swipeDirection = this._getSwipeDirection(gestureState);
+    console.log('EVT: ', evt);
+    console.log('gestureState: ', gestureState);
     this._triggerSwipeHandlers(swipeDirection, gestureState);
   }
 
@@ -69,6 +67,12 @@ class GestureRecognizer extends Component {
       case SWIPE_RIGHT:
         onSwipeRight && onSwipeRight(gestureState);
         break;
+      case SWIPE_UP:
+        onSwipeUp && onSwipeUp(gestureState);
+        break;
+      case SWIPE_DOWN:
+        onSwipeDown && onSwipeDown(gestureState);
+        break;
     }
   }
 
@@ -79,6 +83,10 @@ class GestureRecognizer extends Component {
       return (dx > 0)
         ? SWIPE_RIGHT
         : SWIPE_LEFT;
+    } else if (this._isValidVerticalSwipe(gestureState)) {
+      return (dy > 0)
+        ? SWIPE_DOWN
+        : SWIPE_UP;
     }
     return null;
   }
