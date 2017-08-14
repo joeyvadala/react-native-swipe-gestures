@@ -16,6 +16,7 @@ const swipeConfig = {
 };
 
 function isValidSwipe(velocity, velocityThreshold, directionalOffset, directionalOffsetThreshold) {
+  console.log('OFFSET:' directionalOffset)
   return Math.abs(velocity) > velocityThreshold && Math.abs(directionalOffset) < directionalOffsetThreshold;
 }
 
