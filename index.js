@@ -65,12 +65,6 @@ class GestureRecognizer extends Component {
       case SWIPE_RIGHT:
         onSwipeRight && onSwipeRight(gestureState);
         break;
-      case SWIPE_UP:
-        onSwipeUp && onSwipeUp(gestureState);
-        break;
-      case SWIPE_DOWN:
-        onSwipeDown && onSwipeDown(gestureState);
-        break;
     }
   }
 
@@ -81,10 +75,6 @@ class GestureRecognizer extends Component {
       return (dx > 0)
         ? SWIPE_RIGHT
         : SWIPE_LEFT;
-    } else if (this._isValidVerticalSwipe(gestureState)) {
-      return (dy > 0)
-        ? SWIPE_DOWN
-        : SWIPE_UP;
     }
     return null;
   }
